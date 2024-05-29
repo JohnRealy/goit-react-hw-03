@@ -19,7 +19,7 @@ export default function ContactForm() {
       <Field type="text" name="username" id={usernameId} className={css.name}/>
       <label htmlFor={numId}>Number</label>
       <Field type="number" name="number" id={numId}/>
-    <button type="submit" className={css.btn}>Add contacv</button>
+    <button type="submit" className={css.btn}>Add contact</button>
     </Form>
   </Formik>
   </div>;

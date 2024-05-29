@@ -5,8 +5,11 @@ import css from './ContactList.module.css';
 export default function ContactList({users}) {
   return <ul className={css.list}>
     {users.map(user=>(<li key={user.id} className={css.listItem}>
-      <div><HiOutlineUser/><p>{user.name}</p></div>
-      <div><HiOutlinePhone /><p>{user.number}</p></div>
+      <div className={css.listInfo}>
+       <div className={css.listWrap}><HiOutlineUser/><p>{user.name}</p></div>
+       <div className={css.listWrap}><HiOutlinePhone /><p>{user.number}</p></div>
+      </div>
+      <button type='button' className={css.btn}>Delete</button>
     </li>))}
   </ul>;
 }
