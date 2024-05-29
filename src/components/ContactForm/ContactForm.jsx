@@ -1,5 +1,6 @@
 import { Form, Formik, Field } from "formik";
 import { useId } from "react";
+import css from './ContactForm.module.css';
 
 export default function ContactForm() {
   const usernameId = useId();
@@ -11,13 +12,15 @@ export default function ContactForm() {
   };
 
 
-  return <Formik initialValues={{}} onSubmit={handleSubmit} >
-    <Form>
+  return <div className={css.container}>
+   <Formik initialValues={{}} onSubmit={handleSubmit} >
+    <Form className={css.form}>
       <label htmlFor={usernameId}>Name</label>
-      <Field type="text" name="username" id={usernameId}/>
+      <Field type="text" name="username" id={usernameId} className={css.name}/>
       <label htmlFor={numId}>Number</label>
       <Field type="number" name="number" id={numId}/>
-    <button type="submit">Submit</button>
+    <button type="submit" className={css.btn}>Add contacv</button>
     </Form>
-  </Formik>;
+  </Formik>
+  </div>;
 }
