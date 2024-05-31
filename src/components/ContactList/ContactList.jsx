@@ -2,8 +2,9 @@ import { HiOutlineUser,HiOutlinePhone  } from "react-icons/hi";
 import css from './ContactList.module.css';
 
 
-export default function ContactList({users}) {
-  return <ul className={css.list}>
+export default function ContactList({users, searchQuery}) {
+  if (!searchQuery){
+    return <ul className={css.list}>
     {users.map(user=>(<li key={user.id} className={css.listItem}>
       <div className={css.listInfo}>
        <div className={css.listWrap}><HiOutlineUser/><p>{user.name}</p></div>
@@ -12,4 +13,6 @@ export default function ContactList({users}) {
       <button type='button' className={css.btn}>Delete</button>
     </li>))}
   </ul>;
+  }
+  
 }

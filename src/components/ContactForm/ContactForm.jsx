@@ -2,14 +2,23 @@ import { Form, Formik, Field } from "formik";
 import { useId } from "react";
 import css from './ContactForm.module.css';
 
-export default function ContactForm() {
+export default function ContactForm({users,setUsers, maxId}) {
   const usernameId = useId();
   const numId = useId();
 
   const handleSubmit = (values, actions) => {
+    if(!values.username){
+      return console.log('SAEQWDS')
+    } 
+    setUsers([...users,{
+      id:'id-'+maxId,
+      name: values.username,
+      number: values.number,
+    }])
     console.log(values);
     actions.resetForm();
   };
+
 
 
   return <div className={css.container}>
