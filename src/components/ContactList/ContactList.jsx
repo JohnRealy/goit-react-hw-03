@@ -3,11 +3,16 @@ import css from "./ContactList.module.css";
 
 export default function ContactList({ users, searchQuery, setUsers }) {
   const handleRemove = (id) => {
+    if (searchQuery) {
+      return;
+    }
     const newList = users.filter((user) => user.id !== id);
 
     setUsers(newList);
     console.log("Tis is:", id);
   };
+
+  const trimedQuery = searchQuery.toLowerCase().trim();
 
   if (!searchQuery) {
     return (
@@ -40,7 +45,7 @@ export default function ContactList({ users, searchQuery, setUsers }) {
   return (
     <ul className={css.list}>
       {users
-        .filter((user) => user.name.includes(searchQuery))
+        .filter((user) => user.name.toLowerCase().trim().includes(trimedQuery))
         .map((user) => (
           <li key={user.id} className={css.listItem}>
             <div className={css.listInfo}>

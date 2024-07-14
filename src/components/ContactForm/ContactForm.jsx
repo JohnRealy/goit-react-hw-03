@@ -18,7 +18,6 @@ export default function ContactForm({ users, setUsers, maxId }) {
         number: values.number,
       },
     ]);
-    console.log(users);
     actions.resetForm();
   };
 

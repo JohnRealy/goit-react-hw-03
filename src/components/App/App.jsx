@@ -13,10 +13,15 @@ export default function App() {
   ]);
 
   const [maxId, setMaxId] = useState(0);
+  //MAX ID PROBLEM
 
   const [searchQuery, setSearchQuery] = useState("");
 
   const idCheck = () => {
+    if (users.length === 0) {
+      setMaxId(1);
+      return;
+    }
     const idArray = users.map((el) => Number(el.id.replace("id-", "")));
     setMaxId(Math.max(...idArray) + 1);
   };
@@ -28,11 +33,15 @@ export default function App() {
       <h1>Phonebook</h1>
       <ContactForm users={users} setUsers={setUsers} maxId={maxId} />
       <SearchBox setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
-      <ContactList
-        users={users}
-        searchQuery={searchQuery}
-        setUsers={setUsers}
-      />
+      {users.length === 0 ? (
+        <p>This Phonebook is empty</p>
+      ) : (
+        <ContactList
+          users={users}
+          searchQuery={searchQuery}
+          setUsers={setUsers}
+        />
+      )}
     </div>
   );
 }
