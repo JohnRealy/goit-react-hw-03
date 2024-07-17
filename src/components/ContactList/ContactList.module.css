@@ -1,41 +1,16 @@
-.list{
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap:8px ;
-    padding: 0;
+.list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
 }
 
-.listItem{
-    border: 2px solid black;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 7px;
-    width: 250px;
-    padding: 0 10px;
-}
-
-.listInfo{
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    
-    gap: 4px;
-}
-
-.listWrap{
-    display: flex;
-    align-items: center;
-    gap:4px;
-}
-
-.listWrap p {
-    margin: 0;
-}
-
-.btn{
-    display: block;
-    height: 20px;
-    margin-top: auto;
-    margin-bottom: auto;
+.listItem {
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 7px;
+  width: 250px;
+  padding: 0 10px;
 }

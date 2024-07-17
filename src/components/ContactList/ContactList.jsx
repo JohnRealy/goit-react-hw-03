@@ -1,5 +1,5 @@
-import { HiOutlineUser, HiOutlinePhone } from "react-icons/hi";
 import css from "./ContactList.module.css";
+import Contact from "../Contact/Contact";
 
 export default function ContactList({ users, searchQuery, setUsers }) {
   const handleRemove = (id) => {
@@ -19,23 +19,7 @@ export default function ContactList({ users, searchQuery, setUsers }) {
       <ul className={css.list}>
         {users.map((user) => (
           <li key={user.id} className={css.listItem}>
-            <div className={css.listInfo}>
-              <div className={css.listWrap}>
-                <HiOutlineUser />
-                <p>{user.name}</p>
-              </div>
-              <div className={css.listWrap}>
-                <HiOutlinePhone />
-                <p>{user.number}</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              className={css.btn}
-              onClick={() => handleRemove(user.id)}
-            >
-              Delete
-            </button>
+            <Contact user={user} handleRemove={handleRemove} />
           </li>
         ))}
       </ul>
@@ -48,23 +32,7 @@ export default function ContactList({ users, searchQuery, setUsers }) {
         .filter((user) => user.name.toLowerCase().trim().includes(trimedQuery))
         .map((user) => (
           <li key={user.id} className={css.listItem}>
-            <div className={css.listInfo}>
-              <div className={css.listWrap}>
-                <HiOutlineUser />
-                <p>{user.name}</p>
-              </div>
-              <div className={css.listWrap}>
-                <HiOutlinePhone />
-                <p>{user.number}</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              className={css.btn}
-              onClick={handleRemove(user.id)}
-            >
-              Delete
-            </button>
+            <Contact user={user} handleRemove={handleRemove} />
           </li>
         ))}
     </ul>
