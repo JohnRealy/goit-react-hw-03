@@ -2,11 +2,11 @@ import { Formik, Field } from "formik";
 import { useId } from "react";
 import css from "./SearchBox.module.css";
 
-export default function SearchBox({ setSearchQuery }) {
+export default function SearchBox({ onChange }) {
   const searchId = useId();
 
   const search = (e) => {
-    setSearchQuery(e.target.value);
+    onChange(e.target.value);
     console.log(e.target.value.toLowerCase().trim());
   };
 

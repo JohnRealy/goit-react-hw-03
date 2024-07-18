@@ -3,7 +3,7 @@ import { useId } from "react";
 import css from "./ContactForm.module.css";
 import * as Yup from "yup";
 
-export default function ContactForm({ users, setUsers, maxId }) {
+export default function ContactForm({ updateUsers }) {
   const registerSchema = Yup.object({
     username: Yup.string()
       .required("This field is required")
@@ -15,21 +15,6 @@ export default function ContactForm({ users, setUsers, maxId }) {
   const usernameId = useId();
   const numId = useId();
 
-  const handleSubmit = (values, actions) => {
-    if (!values.username) {
-      return console.log("Error");
-    }
-    setUsers([
-      ...users,
-      {
-        id: "id-" + maxId,
-        name: values.username,
-        number: values.number,
-      },
-    ]);
-    actions.resetForm();
-  };
-
   return (
     <div className={css.container}>
       <Formik
@@ -38,7 +23,7 @@ export default function ContactForm({ users, setUsers, maxId }) {
           number: "",
         }}
         validationSchema={registerSchema}
-        onSubmit={handleSubmit}
+        onSubmit={updateUsers}
       >
         <Form className={css.form}>
           <label htmlFor={usernameId}>Name</label>

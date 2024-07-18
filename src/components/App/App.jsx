@@ -3,6 +3,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import ContactList from "../ContactList/ContactList";
 import css from "./App.module.css";
 import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 
 export default function App() {
   const [users, setUsers] = useState(() => {
@@ -22,34 +23,41 @@ export default function App() {
     localStorage.setItem("saved-users", JSON.stringify(users));
   }, [users]);
 
-  const [maxId, setMaxId] = useState(0);
-  //MAX ID PROBLEM
-
   const [searchQuery, setSearchQuery] = useState("");
 
-  const idCheck = () => {
-    if (users.length === 0) {
-      setMaxId(1);
+  const handleRemove = (id) => {
+    if (searchQuery) {
       return;
     }
-    const idArray = users.map((el) => Number(el.id.replace("id-", "")));
-    setMaxId(Math.max(...idArray) + 1);
+    const newList = users.filter((user) => user.id !== id);
+
+    setUsers(newList);
   };
 
-  useEffect(idCheck, [users]);
+  const handleSubmit = (values, actions) => {
+    setUsers([
+      ...users,
+      {
+        id: nanoid(),
+        name: values.username,
+        number: values.number,
+      },
+    ]);
+    actions.resetForm();
+  };
 
   return (
     <div className={css.container}>
       <h1>Phonebook</h1>
-      <ContactForm users={users} setUsers={setUsers} maxId={maxId} />
-      <SearchBox setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
+      <ContactForm updateUsers={handleSubmit} />
+      <SearchBox onChange={setSearchQuery} searchQuery={searchQuery} />
       {users.length === 0 ? (
         <p>This Phonebook is empty</p>
       ) : (
         <ContactList
-          users={users}
+          usersList={users}
           searchQuery={searchQuery}
-          setUsers={setUsers}
+          removeUser={handleRemove}
         />
       )}
     </div>

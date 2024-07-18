@@ -1,25 +1,15 @@
 import css from "./ContactList.module.css";
 import Contact from "../Contact/Contact";
 
-export default function ContactList({ users, searchQuery, setUsers }) {
-  const handleRemove = (id) => {
-    if (searchQuery) {
-      return;
-    }
-    const newList = users.filter((user) => user.id !== id);
-
-    setUsers(newList);
-    console.log("Tis is:", id);
-  };
-
+export default function ContactList({ usersList, searchQuery, removeUser }) {
   const trimedQuery = searchQuery.toLowerCase().trim();
 
   if (!searchQuery) {
     return (
       <ul className={css.list}>
-        {users.map((user) => (
+        {usersList.map((user) => (
           <li key={user.id} className={css.listItem}>
-            <Contact user={user} handleRemove={handleRemove} />
+            <Contact user={user} handleRemove={removeUser} />
           </li>
         ))}
       </ul>
@@ -28,11 +18,11 @@ export default function ContactList({ users, searchQuery, setUsers }) {
 
   return (
     <ul className={css.list}>
-      {users
+      {usersList
         .filter((user) => user.name.toLowerCase().trim().includes(trimedQuery))
         .map((user) => (
           <li key={user.id} className={css.listItem}>
-            <Contact user={user} handleRemove={handleRemove} />
+            <Contact user={user} handleRemove={removeUser} />
           </li>
         ))}
     </ul>
