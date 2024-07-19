@@ -46,19 +46,22 @@ export default function App() {
     actions.resetForm();
   };
 
+  let usersList = users;
+  if (searchQuery) {
+    usersList = users.filter((user) =>
+      user.name.toLowerCase().trim().includes(searchQuery.toLowerCase().trim())
+    );
+  }
+
   return (
     <div className={css.container}>
       <h1>Phonebook</h1>
-      <ContactForm updateUsers={handleSubmit} />
+      <ContactForm addContact={handleSubmit} />
       <SearchBox onChange={setSearchQuery} searchQuery={searchQuery} />
       {users.length === 0 ? (
         <p>This Phonebook is empty</p>
       ) : (
-        <ContactList
-          usersList={users}
-          searchQuery={searchQuery}
-          removeUser={handleRemove}
-        />
+        <ContactList usersList={usersList} removeUser={handleRemove} />
       )}
     </div>
   );

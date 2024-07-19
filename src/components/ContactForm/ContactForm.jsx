@@ -3,7 +3,7 @@ import { useId } from "react";
 import css from "./ContactForm.module.css";
 import * as Yup from "yup";
 
-export default function ContactForm({ updateUsers }) {
+export default function ContactForm({ addContact }) {
   const registerSchema = Yup.object({
     username: Yup.string()
       .required("This field is required")
@@ -23,7 +23,7 @@ export default function ContactForm({ updateUsers }) {
           number: "",
         }}
         validationSchema={registerSchema}
-        onSubmit={updateUsers}
+        onSubmit={addContact}
       >
         <Form className={css.form}>
           <label htmlFor={usernameId}>Name</label>
